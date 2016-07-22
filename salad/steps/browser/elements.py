@@ -1,4 +1,5 @@
 from lettuce import step, world
+from selenium.common.exceptions import StaleElementReferenceException
 from salad.tests.util import assert_equals_with_negate, assert_with_negate, parsed_negator
 from salad.steps.browser.finders import (PICK_EXPRESSION, ELEMENT_FINDERS, ELEMENT_THING_STRING,
     _get_visible_element)
@@ -86,7 +87,7 @@ class ExistenceStepsFactory(object):
                                 find_pattern, wait_time, *args):
         try:
             element = _get_visible_element(finder_function, pick, find_pattern)
-        except ElementDoesNotExist:
+        except (ElementDoesNotExist, StaleElementReferenceException):
             assert parsed_negator(negate)
             element = None
         self.test(element, negate, *args)
