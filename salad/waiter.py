@@ -1,10 +1,11 @@
 import time
 
-POLL_FREQUENCY = 0.5  # How long to sleep inbetween calls to the method
+from . import config
+
 
 class SaladWaiter(object):
 
-    def __init__(self, timeout, poll_frequency=POLL_FREQUENCY, ignored_exceptions=None):
+    def __init__(self, timeout, poll_frequency=config.POLL_FREQUENCY, ignored_exceptions=None):
         """Constructor
            Args:
             - timeout - Number of seconds before timing out
@@ -16,11 +17,11 @@ class SaladWaiter(object):
             from salad.waiter import SaladWaiter
             element = SaladWaiter(10).until(False, some_method, method_argument1, method_argument2,..)
         """
-        self._timeout = timeout
+        self._timeout = (timeout or config.DEFAULT_TIMEOUT) * config.TIMEOUT_MULTIPLIER
         self._poll = poll_frequency
         # avoid the divide by zero
         if self._poll == 0:
-            self._poll = POLL_FREQUENCY
+            self._poll = config.POLL_FREQUENCY
         exceptions = []
         if ignored_exceptions is not None:
             try:
@@ -55,6 +56,7 @@ class SaladWaiter(object):
 
     def until_not(self, method, *args):
         return self._until(True, method, *args)
+
 
 class TimeoutException(Exception):
     pass
