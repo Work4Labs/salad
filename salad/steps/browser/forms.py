@@ -29,11 +29,11 @@ def _generate_content(type_of_fill, length):
 
 
 def _generate_random_string(length):
-    lst = [choice(ascii_letters) for n in xrange(length)]
+    lst = [choice(ascii_letters) for n in range(length)]
     return "".join(lst)
 
 
-for finder_string, finder_function in ELEMENT_FINDERS.iteritems():
+for finder_string, finder_function in list(ELEMENT_FINDERS.items()):
 
     def _type_generator(finder_string, finder_function):
         @step(r'(slowly )?type "([^"]*)" into the%s %s %s' % (PICK_EXPRESSION, ELEMENT_THING_STRING, finder_string))

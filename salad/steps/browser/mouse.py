@@ -76,8 +76,8 @@ def drag_and_drop_generator(thing_string, finder_string_from, finder_string_to,
     return _this_step
 
 
-for action_string, action_function in actions.iteritems():
-    for finder_string, finder_function in ELEMENT_FINDERS.iteritems():
+for action_string, action_function in list(actions.items()):
+    for finder_string, finder_function in list(ELEMENT_FINDERS.items()):
         globals()["element_%s_%s" % (action_function, finder_function)] = step_generator( action_string,
                                                                                           action_function,
                                                                                           ELEMENT_THING_STRING,
@@ -85,7 +85,7 @@ for action_string, action_function in actions.iteritems():
                                                                                           finder_function
                                                                                          )
 
-    for finder_string, finder_function in LINK_FINDERS.iteritems():
+    for finder_string, finder_function in list(LINK_FINDERS.items()):
         globals()["link_%s_%s" % (action_function, finder_function)] = step_generator( action_string,
                                                                                        action_function,
                                                                                        LINK_THING_STRING,
@@ -93,8 +93,8 @@ for action_string, action_function in actions.iteritems():
                                                                                        finder_function
                                                                                       )
 
-for finder_string_from, finder_function_from in ELEMENT_FINDERS.iteritems():
-    for finder_string_to, finder_function_to in ELEMENT_FINDERS.iteritems():
+for finder_string_from, finder_function_from in list(ELEMENT_FINDERS.items()):
+    for finder_string_to, finder_function_to in list(ELEMENT_FINDERS.items()):
         globals()["element_drag_%s_%s" % (finder_function_from, finder_function_to)] = drag_and_drop_generator(
                                      ELEMENT_THING_STRING,
                                      finder_string_from,

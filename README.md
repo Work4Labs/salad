@@ -4,6 +4,17 @@ Salad was originally developed at [Wieden+Kennedy](http://wk.com), and was subse
 
 [![Build Status](https://secure.travis-ci.org/wieden-kennedy/salad.png?branch=master)](http://travis-ci.org/wieden-kennedy/salad)
 
+Testing the repo
+==========
+now compatible with python3
+because we are using a setup.py file to setup the env, the dependencies are there.
+It turns out that salade and lettuce are both not compatible with python 3
+The salad repo is one of our fork, so we have to do the work ourselves.
+For lettuce, there is an existing fork that does support python 3. However,
+it's not referenced in pypip, so we have to reference it via a github.
+This makes the `setup.py install` command bug tho, so you are going to have to install
+the dependencies via `pip install -I .`
+
 Installing
 ==========
 

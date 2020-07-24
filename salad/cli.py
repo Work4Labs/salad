@@ -8,7 +8,7 @@ from salad.steps.everything import *
 from salad.terrains.everything import *
 
 BROWSER_CHOICES = [browser.lower()
-                   for browser in DesiredCapabilities.__dict__.keys()
+                   for browser in list(DesiredCapabilities.__dict__.keys())
                    if not browser.startswith('_')]
 BROWSER_CHOICES.sort()
 DEFAULT_BROWSER = 'firefox'
