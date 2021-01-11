@@ -69,7 +69,7 @@ class ExistenceStepsFactory(object):
             except TimeoutException as t:
                 # BEWARE: only way to get step regular expression
                 expression, func = step._get_match(True)
-                logger.error(t.message)
+                logger.error(str(t))
                 logger.error("Encountered error using definition '%s'" %
                              expression.re.pattern)
                 message = ("Element not found or assertion failed using pattern '%s' after %s seconds" %
